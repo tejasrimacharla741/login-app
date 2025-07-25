@@ -1,0 +1,11 @@
+<form [formGroup]="loginForm" class="login-form">
+  <label class="login-label" for="username">Email:</label>
+  <input id="username" type="text" formControlName="username" class="login-input" required />
+
+  <label class="login-label" for="password">Password:</label>
+  <input id="password" type="password" formControlName="password" class="login-input" required />
+
+  <button type="button" (click)="onLogin()" class="login-button">Login</button>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</form>

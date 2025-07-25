@@ -1,0 +1,24 @@
+
+<h2>Welcome to Dashboard</h2>
+
+<button (click)="getContent()">View Content</button>
+
+<ul *ngIf="contents.length > 0">
+    <li *ngFor="let item of contents">{{ item }}</li>
+</ul>
+
+<div>
+    <input [(ngModel)]="contentInput" placeholder="Enter content" />
+    <button (click)="addContent()">Add Content</button>
+</div>
+
+<button (click)="getUsers()">View Users</button>
+<ul *ngIf="users.length > 0">
+    <li *ngFor="let user of users">
+        {{ user.username }} - {{ user.role }}
+    </li>
+</ul>
+
+<p>{{ result }}</p>
+
+<button (click)="logout()">Logout</button>
