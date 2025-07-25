@@ -17,12 +17,12 @@ namespace JwtApp.Controllers
         public IActionResult GetUsers()
         {
             var currentUser = GetCurrentUser();
-            var users = new[]
+            var users = UserConstants.Users.Select(u => new
             {
-                new { Username = "alice", Role = "Admin" },
-                new { Username = "bob", Role = "Editor" },
-                new { Username = "charlie", Role = "Viewer" }
-            };
+                u.Username,
+                u.Role,
+                u.EmailAddress
+            }).ToList();
             return Ok(users);
         }
 
