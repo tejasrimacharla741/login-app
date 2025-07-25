@@ -1,4 +1,4 @@
-
+<!-- 
 <h2>Welcome to Dashboard</h2>
 
 <button (click)="getContent()">View Content</button>
@@ -21,4 +21,33 @@
 
 <p>{{ result }}</p>
 
-<button (click)="logout()">Logout</button>
+<button (click)="logout()">Logout</button> -->
+
+<h2 class="dashboard-title">Welcome to Dashboard</h2>
+
+<button class="btn btn-primary" (click)="getContent()">View Content</button>
+
+<ul class="content-list" *ngIf="contents.length > 0 && isOpened">
+    <li class="content-item" *ngFor="let item of contents">{{ item }}</li>
+</ul>
+
+<div class="content-input-container">
+    <input class="content-input" [(ngModel)]="contentInput" placeholder="Enter content" />
+    <button class="btn btn-add" (click)="addContent()">Add Content</button>
+</div>
+
+<button class="btn btn-primary" (click)="getUsers()">View Users</button>
+
+<ul class="user-list" *ngIf="users.length > 0">
+    <li class="user-item" *ngFor="let user of users">
+        {{ user.username }} - {{ user.role }}
+    </li>
+</ul>
+
+<p class="result-text">{{ result }}</p>
+
+<button class="btn btn-logout" (click)="logout()">Logout</button>
+
+<div class="toaster" *ngIf="showToaster">
+  Content added successfully!
+</div>

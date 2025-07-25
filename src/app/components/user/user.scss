@@ -1,0 +1,123 @@
+.dashboard-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.btn {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: #fff;
+  margin-left: 0.5rem;
+
+  &:hover {
+    background-color: #1e7e34;
+  }
+}
+
+.btn-logout {
+  background-color: #dc3545;
+  color: #fff;
+  margin-top: 1.5rem;
+
+  &:hover {
+    background-color: #a71d2a;
+  }
+}
+
+.content-list,
+.user-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+.content-item,
+.user-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #444;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.content-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.25rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-input {
+  flex-grow: 1;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+}
+
+.result-text {
+  text-align: center;
+  margin-top: 1rem;
+  font-style: italic;
+  color: #555;
+  font-weight: bold;
+}
+.toaster {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  font-weight: 600;
+  z-index: 1000;
+  opacity: 0.9;
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10%, 90% { opacity: 0.9; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}

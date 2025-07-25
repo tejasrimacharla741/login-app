@@ -16,15 +16,18 @@ export class UserComponent {
   contentInput: string = '';
   contents: string[] = [];
   users: any[] = [];
+  showToaster: boolean = false;
+  isOpened:boolean = false;
 
   constructor(
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private router: Router
-  ) {}
+  ) { }
 
   getContent() {
     this.result = 'Loading content...';
+    this.isOpened = true;
     this.authService.getContents().subscribe({
       next: (data) => {
         this.contents = data;
@@ -32,7 +35,7 @@ export class UserComponent {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        this.handleError(err);
+        this.handleError(err, 'getContent');
       }
     });
   }
@@ -43,13 +46,19 @@ export class UserComponent {
     this.result = 'Adding content...';
     this.authService.addContent(this.contentInput).subscribe({
       next: (data) => {
-        this.contents = data;
+        if(this.isOpened)
+          this.contents = data;
         this.contentInput = '';
         this.result = 'Content added successfully.';
+        this.showToaster = true;
         this.cdr.detectChanges();
+        setTimeout(() => {
+          this.showToaster = false;
+          this.cdr.detectChanges();
+        }, 3000);
       },
       error: (err) => {
-        this.handleError(err);
+        this.handleError(err, 'addContent');
       }
     });
   }
@@ -63,7 +72,7 @@ export class UserComponent {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        this.handleError(err);
+        this.handleError(err, 'getUsers');
       }
     });
   }
@@ -72,11 +81,27 @@ export class UserComponent {
     this.authService.logout();
   }
 
-  private handleError(err: any) {
+  private handleError(err: any, context: string = '') {
     if (err.status === 403) {
-      this.result = 'Access denied: You do not have permission.';
+      if (context === 'getContent') {
+        this.result = 'Access denied: Only admins can access this data.';
+      } else if (context === 'addContent') {
+        this.result = 'Access denied: You are not authorized to add users.';
+      } else if (context === 'getUsers') {
+        this.result = 'Access denied: Only admins can access this data.';
+      } else {
+        this.result = 'Access denied: You do not have permission.';
+      }
     } else if (err.status === 401) {
-      this.result = 'Unauthorized: Please log in.';
+      if (context === 'getContent') {
+        this.result = 'Unauthorized: Please log in to view users.';
+      } else if (context === 'addContent') {
+        this.result = 'Unauthorized: Please log in to add users.';
+      } else if (context === 'getUsers') {
+        this.result = 'Access denied: You are not authorized to add Content.';
+      } else {
+        this.result = 'Unauthorized: Please log in.';
+      }
     } else {
       this.result = 'Error: ' + (err?.error || err.message || 'Unknown error');
     }
